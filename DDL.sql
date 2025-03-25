@@ -1,0 +1,88 @@
+USE [Tech_Lib_project]
+GO
+/****** Object:  Table [dbo].[Books]    Script Date: 3/25/2025 12:33:05 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Books](
+	[BookID] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](100) NOT NULL,
+	[Author] [nvarchar](100) NOT NULL,
+	[ISBN] [char](13) NOT NULL,
+	[PublishedDate] [date] NOT NULL,
+	[MembershipDate] [date] NOT NULL,
+	[GenreID] [int] NOT NULL,
+	[ShelfLocationID] [int] NOT NULL,
+	[CurrentStatus] [bit] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[BookID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Borrowers]    Script Date: 3/25/2025 12:33:05 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Borrowers](
+	[BorrowerID] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](100) NOT NULL,
+	[LastName] [nvarchar](100) NOT NULL,
+	[Email] [nvarchar](256) NOT NULL,
+	[DateOfBirth] [date] NOT NULL,
+	[MembershipDate] [date] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[BorrowerID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Genres]    Script Date: 3/25/2025 12:33:05 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Genres](
+	[GenreID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[GenreID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Loans]    Script Date: 3/25/2025 12:33:05 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Loans](
+	[LoanID] [int] IDENTITY(1,1) NOT NULL,
+	[BookID] [int] NOT NULL,
+	[BorrowerID] [int] NOT NULL,
+	[DateBorrowed] [date] NOT NULL,
+	[DueDate] [date] NOT NULL,
+	[DateReturned] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[LoanID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ShelfLocations]    Script Date: 3/25/2025 12:33:05 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ShelfLocations](
+	[ShelfID] [int] IDENTITY(1,1) NOT NULL,
+	[Section] [nvarchar](100) NULL,
+	[Floor] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[ShelfID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
