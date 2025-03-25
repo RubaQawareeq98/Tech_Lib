@@ -1,5 +1,19 @@
 USE [Tech_Lib_project]
 GO
+
+CREATE TABLE [dbo].[AuditLog](
+	[LogID] [int] IDENTITY(1,1) NOT NULL,
+	[BookID] [int] NOT NULL,
+	[OldStatus] [bit] NULL,
+	[NewStatus] [bit] NULL,
+	[ChangeDate] [date] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[LogID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
 /****** Object:  Table [dbo].[Books]    Script Date: 3/25/2025 12:33:05 AM ******/
 SET ANSI_NULLS ON
 GO
