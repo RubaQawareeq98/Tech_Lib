@@ -10,7 +10,7 @@ AS
 BEGIN
 	IF EXISTS (SELECT * FROM Borrowers WHERE Email = @Email)
 	BEGIN
-		RAISERROR ('Email is already Taken', 1,16)
+		RAISERROR ('Email is already Taken', 16,1)
 	END
 
 	INSERT INTO Borrowers VALUES (@FirstName, @LastName, @Email, @DateOfBirth, @MembershipDate);

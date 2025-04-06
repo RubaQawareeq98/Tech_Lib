@@ -2,7 +2,7 @@ WITH AgeIntervals AS
 (
 	SELECT l.BookID,
 		FLOOR(DATEDIFF(YEAR, bor.DateOfBirth, GetDate()) / 10 * 10) + 1 As lowBound,
-		FLOOR(DATEDIFF(YEAR, bor.DateOfBirth, GetDate()) / 10 * 10) + 10 As HighBound
+		FLOOR(DATEDIFF(YEAR, bor.DateOfBirth, GetDate()) / 10 * 10) + 10 As highBound
 
 	FROM Loans l
 	JOIN Borrowers bor
@@ -12,13 +12,13 @@ GenreCount AS
 (
 	SELECT COUNT(g.Name) AS genreCount,
 	g.Name,
-	CONCAT(ai.lowBound, '-', ai.HighBound) AS interval
+	CONCAT(ai.lowBound, '-', ai.highBound) AS interval
 	FROM AgeIntervals ai
 	JOIN Books b
 	ON ai.BookID = b.BookID
 	JOIN Genres g
 	ON b.GenreID = g.GenreID
-	GROUP BY ai.lowBound, ai.HighBound, g.Name
+	GROUP BY ai.lowBound, ai.highBound, g.Name
 ),
 MaxGenreCountBorrowed AS
 (
