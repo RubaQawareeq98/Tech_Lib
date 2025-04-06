@@ -1,3 +1,5 @@
+DROP PROCEDURE IF EXISTS sp_AddNewBorrower;
+GO
 CREATE PROCEDURE sp_AddNewBorrower
 			(
 			@FirstName NVARCHAR(100),
