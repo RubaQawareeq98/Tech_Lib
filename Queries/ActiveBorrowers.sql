@@ -1,13 +1,22 @@
-WITH BorrowersCount AS
+WITH AllBorrowerLoans AS
+(
+	SELECT BorrowerID,
+	COUNT(*) AS Times
+	FROM Loans
+	GROUP BY BorrowerID
+	HAVING COUNT(*) >= 2  
+),
+NotReturnedBooks AS
 (
 	SELECT BorrowerID,
 	COUNT(*) AS Times
 	FROM Loans
 	WHERE DateReturned IS NULL
-	GROUP BY BorrowerID
-	HAVING COUNT(*) >= 2  
+	GrouP BY BorrowerID
 )
-SELECT b.*, bc.Times
-FROM Borrowers b
-JOIN BorrowersCount bc
-ON b.BorrowerID = bc.BorrowerID
+
+SELECT bc.*
+FROM NotReturnedBooks bc
+JOIN AllBorrowerLoans bl
+ON bc.BorrowerID = bl.BorrowerID
+WHERE bc.Times  = bl.Times
