@@ -4,8 +4,16 @@ BEGIN
 DECLARE @fee INT = 0;
 DECLARE @overdueDays INT = 0;
 DECLARE @returnedDate DATE;
+DECLARE @dueDate DATE;
 
-	SELECT @returnedDate = DateReturned
+	IF NOT EXISTS (SELECT '*' FROM Loans WHERE LoanID = @loanID)
+	BEGIN
+		RETURN NULL;
+	END
+
+	SELECT 
+		@returnedDate = DateReturned,
+		@dueDate = DueDate
 	FROM Loans
 	WHERE LoanID = @loanID;
 
@@ -14,9 +22,7 @@ DECLARE @returnedDate DATE;
 		SET @returnedDate =	GETDATE()
 	END
 	
-	SELECT @overdueDays = DATEDIFF(DAY, DueDate, @returnedDate)
-	FROM Loans
-	WHERE LoanID = @loanID
+	SET @overdueDays = DATEDIFF(DAY, @dueDate, @returnedDate)
 	
 	IF (@overdueDays > 0 AND @overdueDays < 30)
 	BEGIN
