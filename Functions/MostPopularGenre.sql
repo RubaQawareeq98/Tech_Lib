@@ -1,4 +1,4 @@
-CREATE FUNCTION fn_PopularGenrePerMonth(@month INT)
+CREATE FUNCTION fn_PopularGenreForMonth(@month INT)
 RETURNS TABLE
 AS 
 RETURN
